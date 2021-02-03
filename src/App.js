@@ -1,4 +1,6 @@
 import './App.css';
+import Navbar from './Navbar';
+import Home from './Home';
 
 function App() {
    // jadi pada react, kita buat nya itu komponen, yang mana misal navbar, kita buat jadi sebuah komponen, nah komponen itu kita buat dalam function, contohnya kaya komponen App ini. yang mana didalam function itu, kita bisa menuliskan apapun sintak js sperti biasanya, dan me return sebuah JSX atau html template yang berupa js.
@@ -16,15 +18,21 @@ function App() {
 
 	return (
 		<div className="App">
+         <Navbar />
 			<div className="content">
-				<h1>Biodata Mahasiswa</h1>
+            <Home />
+
+
+
+
+				{/* <h1>Biodata Mahasiswa</h1>
             <h2>{greetings}</h2>
             <p>Nama : {user}</p>
             <p>Umur : {age}</p>
             <p>Universitas : <a href={univLink} target="_blank">Univ Brawijaya</a></p>
             <p>Prodi : {prodi}</p>
             <p>Hasil Studi : {khs}</p>
-            <p>IPS : {ips}</p>
+            <p>IPS : {ips}</p> */}
 			</div>
 		</div>
 	);
