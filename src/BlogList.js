@@ -1,4 +1,4 @@
-const BlogList = ({blogs, title}) => {
+const BlogList = ({blogs, title, handleDelete}) => {
    // Menggunakan props
 
    // Nah tujuan menggunakan props itu biar komponennya lebih reuseable bisa digunakan di semua page, tinggal panggil tagnya saja, tanpa perlu menulis lagi logik dari code yang sama.
@@ -16,6 +16,8 @@ const BlogList = ({blogs, title}) => {
    // const BlogList = (props) => { const blogs = props.blogs; const title = props.title} atau bisa juga
    // const BlogList = ({blogs, title}) => {console.log(blogs, title)}
 
+   // Propsnya juga bisa menerima sebuah argument berupa function. jadi pada saat memanggil tagnya, tinggal mengirimkan saja props misal handleDelete={handleDelete} seperti pada Home.js
+
 	return (
 		<div className="blog-list">
          <h2>{title}</h2>
@@ -23,6 +25,7 @@ const BlogList = ({blogs, title}) => {
 				<div className="blog-preview" key={blog.id}>
 					<h2>{blog.title}</h2>
 					<p>Written by {blog.author} </p>
+               <button onClick={() => handleDelete(blog.id)}>Delete</button>
 				</div>
 			))}
 		</div>
