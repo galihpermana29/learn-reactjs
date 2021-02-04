@@ -21,6 +21,8 @@ const Home = () => {
 	return (
 		<div className="home">
          <BlogList blogs={blogs} title="All Blogs!"/>
+         {/* reuseable components, doing filtering on the props */}
+         <BlogList blogs={blogs.filter(blog => blog.author === 'mario')} title="Mario's Blogs"/>
 
 			{/* <p>{name}</p> */}
 			{/* if the function doesnt passing an argument */}
