@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BlogList from './BlogList';
 const Home = () => {
 	// let name = 'Galih';
@@ -23,11 +23,18 @@ const Home = () => {
       setBlogs(newBlogs)
     }
 
+    // useEffect(), akan tereksekusi setiap kali rendering, nah untuk mencustom kapan dia di eksekusi adalah pada parameter kedua tambahkan dependencies atau value yang akan di lihat jika ada perubahan maka di eksekusi 
+    const [name, setName] = useState('Permana')
+    useEffect(() => {
+       console.log(name)
+    }, [name, blogs]) // value ke 2 pada useEffect(() => console.log('galih'), [name, blogs])
+
 	return (
 		<div className="home">
          <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete}/>
          {/* reuseable components, doing filtering on the props */}
          <BlogList blogs={blogs.filter(blog => blog.author === 'mario')} title="Mario's Blogs" handleDelete={handleDelete}/>
+         <button onClick={() => setName('Galih')}>Click Me {name} </button>
 
 			{/* <p>{name}</p> */}
 			{/* if the function doesnt passing an argument */}
