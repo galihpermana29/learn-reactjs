@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const BlogList = ({blogs, title, handleDelete}) => {
    // Menggunakan props
 
@@ -23,8 +25,11 @@ const BlogList = ({blogs, title, handleDelete}) => {
          <h2>{title}</h2>
 			{blogs.map((blog) => (
 				<div className="blog-preview" key={blog.id}>
-					<h2>{blog.title}</h2>
-					<p>Written by {blog.author} </p>
+               {/* Lalu pada bagian ini, kita bungkus dengan Link yang to="/blogs/blog.id" jadi kalau di klik, maka akan menuju ke url dengan path /blogs/blog.idnya berapa*/}
+               <Link to={`/blogs/${blog.id}`}> 
+                  <h2>{blog.title}</h2>
+                  <p>Written by {blog.author} </p>
+               </Link>
                <button onClick={() => handleDelete(blog.id)}>Delete</button>
 				</div>
 			))}
