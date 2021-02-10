@@ -13,6 +13,7 @@ const Home = () => {
    // };
 
    const [blogs, setBlogs] = useState(null)
+   const [isPending, setIsPending] = useState(true)
 
     const handleDelete = (id) => {
       const newBlogs = blogs.filter(blog => blog.id !== id)
@@ -26,11 +27,14 @@ const Home = () => {
          .then(res => res.json())
          .then(data => {
             setBlogs(data)
+            setIsPending(false)
          })
     }, []) // akan di eksekusi sekali saja
 
 	return (
 		<div className="home">
+         {/* Kondisi ketika loading, jadi buat state yang true, kalau isPending itu true munculkan div yang tulisannya loading, kalau data sudah berhasil di fetch maka setIsPending(false) agar tulisan loading tidak muncul */}
+         {isPending && <div>Loading....</div>}
          {/* Kalau props blog dikirim langsung, maka null lah yang akan di kirimkan dan akan terjadi eror, karena fetching itukan async jadi butuh beberapa saat untuk mendapatkan datanya, makanyan diambil default valuenya yaitu null. untuk mengatasi kita bisa kasih logic &&
          */}
          {blogs && <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete}/>}
