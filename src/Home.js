@@ -12,11 +12,7 @@ const Home = () => {
 	// 	setName('Permana');
    // };
 
-   const [blogs, setBlogs] = useState([
-      { title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1 },
-      { title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2 },
-      { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
-    ])
+   const [blogs, setBlogs] = useState(null)
 
     const handleDelete = (id) => {
       const newBlogs = blogs.filter(blog => blog.id !== id)
@@ -26,22 +22,19 @@ const Home = () => {
     // useEffect(), akan tereksekusi setiap kali rendering, nah untuk mencustom kapan dia di eksekusi adalah pada parameter kedua tambahkan dependencies atau value yang akan di lihat jika ada perubahan maka di eksekusi 
     const [name, setName] = useState('Permana')
     useEffect(() => {
-       console.log(name)
-    }, [name, blogs]) // value ke 2 pada useEffect(() => console.log('galih'), [name, blogs])
+       fetch('http://localhost:8000/blogs')
+         .then(res => res.json())
+         .then(data => {
+            setBlogs(data)
+         })
+    }, []) // akan di eksekusi sekali saja
 
 	return (
 		<div className="home">
-         <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete}/>
-         {/* reuseable components, doing filtering on the props */}
-         <BlogList blogs={blogs.filter(blog => blog.author === 'mario')} title="Mario's Blogs" handleDelete={handleDelete}/>
-         <button onClick={() => setName('Galih')}>Click Me {name} </button>
-
-			{/* <p>{name}</p> */}
-			{/* if the function doesnt passing an argument */}
-			{/* <button onClick={handleClickOne}>Click Me</button> */}
-			{/* <button onClick={(e) => {
-            handleClickTwo('Galih', e)
-         }}>Click Me Again</button> */}
+         {/* Kalau props blog dikirim langsung, maka null lah yang akan di kirimkan dan akan terjadi eror, karena fetching itukan async jadi butuh beberapa saat untuk mendapatkan datanya, makanyan diambil default valuenya yaitu null. untuk mengatasi kita bisa kasih logic &&
+         */}
+         {blogs && <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete}/>}
+         {/* Cara bacanya adalah, kalau blogs === false, maka yang di sebelah kanan gabakal di eksekusi atau ditampilkan. Kalau blogs === true, maka lanjut kesebelah kanan atau mengeksekusi nya. */}
 		</div>
 	);
 };
