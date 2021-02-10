@@ -14,6 +14,7 @@ const Home = () => {
 
    const [blogs, setBlogs] = useState(null)
    const [isPending, setIsPending] = useState(true)
+   const [isFailed, setIsFailed] = useState(false)
 
     const handleDelete = (id) => {
       const newBlogs = blogs.filter(blog => blog.id !== id)
@@ -24,15 +25,25 @@ const Home = () => {
     const [name, setName] = useState('Permana')
     useEffect(() => {
        fetch('http://localhost:8000/blogs')
-         .then(res => res.json())
+         .then(res => {
+            if(!res.ok) {
+               throw Error('Could not fetch the endpoints')
+            }
+            return res.json()
+         })
          .then(data => {
             setBlogs(data)
+            setIsPending(false)
+         })
+         .catch(err => {
+            setIsFailed(err.message)
             setIsPending(false)
          })
     }, []) // akan di eksekusi sekali saja
 
 	return (
 		<div className="home">
+         {isFailed && <div>{isFailed}</div>}
          {/* Kondisi ketika loading, jadi buat state yang true, kalau isPending itu true munculkan div yang tulisannya loading, kalau data sudah berhasil di fetch maka setIsPending(false) agar tulisan loading tidak muncul */}
          {isPending && <div>Loading....</div>}
          {/* Kalau props blog dikirim langsung, maka null lah yang akan di kirimkan dan akan terjadi eror, karena fetching itukan async jadi butuh beberapa saat untuk mendapatkan datanya, makanyan diambil default valuenya yaitu null. untuk mengatasi kita bisa kasih logic &&
