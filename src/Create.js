@@ -1,9 +1,13 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 
 const Create = () => {
 	const [title, setTitle] = useState('');
 	const [body, setBody] = useState('');
 	const [author, setAuthor] = useState('Mario');
+   const [isPending, setIsPending] = useState(false)
+   const history = useHistory();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -12,6 +16,21 @@ const Create = () => {
 			body,
 			author,
 		};
+      setIsPending(true)
+		fetch('http://localhost:8000/blogs', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(blog),
+		}).then(() => {
+         setIsPending(false)
+         setTitle('')
+         setBody('')
+         history.push('/') // menggunakan state useHistory untuk redirect ke halaman home page, jika di console (history) akan bayak sekali method yang bisa digunakan
+         alert('New Blog Successfully Added')
+         
+      }).catch((err) => {
+         alert('Failed Adding a New Blog', err.message)
+      })
 	};
 	return (
 		<div className="create">
@@ -35,7 +54,8 @@ const Create = () => {
 					<option value="Mario">Mario</option>
 					<option value="Yoshi">Yoshi</option>
 				</select>
-				<button>Add Blog</button>
+				{!isPending && <button>Add Blog</button>}
+				{isPending && <button disabled>Wait a bit second...</button>}
 			</form>
 		</div>
 	);
