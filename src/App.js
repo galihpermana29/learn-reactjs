@@ -4,6 +4,7 @@ import Home from './Home';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Create from './Create';
 import BlogDetail from './BlogDetail';
+import NotFound from './NotFound';
 
 // Untuk bisa ganti ganti page, kita butuh reactRouter yang mana harus di install dulu npm install react-router-dom@5
 // Lalu gunakan Router untuk membungkus elemennya, lalu gunakan switch jika bagian dari elemen tersebut yang ingin diganti ganti. Jangan lupa tambahkan tag route dahulu beserta pathnya yang mengarah ke tujuannya.
@@ -26,6 +27,9 @@ function App() {
 						</Route>
 						<Route path="/blogs/:id">
 							<BlogDetail/>
+						</Route>
+						<Route path="*">
+							<NotFound />
 						</Route>
 					</Switch>
 				</div>

@@ -9,6 +9,11 @@ const useFetch = (url) => {
 	const handleDelete = (id) => {
 		const newBlogs = data.filter((blog) => blog.id !== id);
 		setData(newBlogs);
+      fetch(`http://localhost:8000/blogs/${id}`, {
+         method: "DELETE"
+      }).then(() => {
+         alert('Successfully Deleted')
+      })
 	};
 
 	useEffect(() => {

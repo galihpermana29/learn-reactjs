@@ -13,34 +13,16 @@
       "id": 2
     },
     {
-      "title": "Anjrot",
-      "body": "Anjrot adalah sebuah ",
-      "author": "Mario",
-      "id": 3
-    },
-    {
-      "title": "lorem ipsum",
-      "body": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias hic totam in debitis ut, ipsam aliquam iste expedita dolor tenetur.",
-      "author": "Yoshi",
-      "id": 4
-    },
-    {
       "title": "Stateless vs Statefull React JS Component",
       "body": "Above is one such a functional component which only displays the props attribute passed from another component. We can call event handling functions from functional component which are located in class components (containers).\n\nContainers means which contains some local state or event or user actions.\n\nWe can add some logical dynamic code in the functional component but no modification of state or applications data.\n\nPASSING METHOD REFERENCE FROM FUNCTIONAL COMPONENT\nIn dynamic output post, we have seen how to pass attribute from parent component to child functional component. Similar to it, we can add a method reference.",
       "author": "Mario",
       "id": 5
     },
     {
-      "title": "ada",
-      "body": "ad",
+      "title": "Bot",
+      "body": "Bot adalah seorang anjing",
       "author": "Mario",
       "id": 6
-    },
-    {
-      "title": "ada",
-      "body": "ad",
-      "author": "Mario",
-      "id": 7
     }
   ]
 }
