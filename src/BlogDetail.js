@@ -19,7 +19,7 @@ const BlogDetail = () => {
 	const { data: blog, isPending, isFailed, handleDelete } = useFetch(
 		`http://localhost:8000/blogs/${id}`
 	);
-	console.log(blog);
+   
 	return (
 		<div className="blog-detail">
 			{isFailed && <div>{isFailed}</div>}
